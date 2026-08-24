@@ -116,7 +116,7 @@ gptimer_event_callbacks_t megaTimerCallback ={
 esp_timer_handle_t gsnTimerHandle;
 esp_timer_create_args_t gsnTimerSetup= {
    .callback=runOnESPTimerIntr,
-   .arg =(void*) &global,
+   .arg = (void*) &global,
    .dispatch_method=ESP_TIMER_ISR,
    .name= "i2ctimer",
    .skip_unhandled_events = true
