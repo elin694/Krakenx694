@@ -1,7 +1,6 @@
 #include "constants.h"
 #include "Wire.h"
 #include <Arduino.h>
-#include "Arduino.h"
 // #include "parkClarkTestCases.h"
 
 // TwoWire Wire;
@@ -33,13 +32,15 @@ void loop() {
       Takes summationVector and represents it in terms of encoder.
       Value stored in iPark[] in (radial, tangential)/ dq format
   */
-   #ifdef CP_TEST_CASES
-      printf("After Clark: Current (I)  Vector with size (A) %f and angle (degrees) %f \n",summationVector[0] ,summationVector[1] );
+  #ifdef CP_TEST_CASES
+    printf("After Clark: Current (I)  Vector with size (A) %f and angle (degrees) %f \n",summationVector[0] ,summationVector[1] );
   #endif
+
   calculateElectricalAngle();
   #ifdef CP_TEST_CASES
       printf("Post Calculation Rotor angle (degrees) %f \n",electricalDegree );
   #endif
+  
   /* takes in direction and electrical degree, outputs current vector dq frame (based 
   around encoder value) in iPark[] (format: (float) direct, (float) quadrature)
   */
@@ -64,21 +65,6 @@ void loop() {
   #endif
   delay(30000);
 }
-void toClark() {
-  // iClark[i] = {x axis (ia), y axis}
-  // turns 3 vector phase representation into 1 in (arg, dir)
-  //  call after all phase currents are measured/calculated
-  //RR aangle for matrix calc
-  int x, y = 0;
-  for (int i = 2; i >= 0; i--)
-  { // i=2, 1 ,0
-    x += cos(120 * i) * phaseCurrent[i];
-    y += sin(120 * i) * phaseCurrent[i];
-  }
-  summationVector[0] = sqrt(pow(x, 2) + pow(y, 2));
-  summationVector[1] = atan2f(y, x);
-}
-
 void calculateElectricalAngle(){
   //  taking and comparing (90 + electrical degree of rotor (ideal)) and phase current (actual)
   // read encoder value for rotor flux (electrical angle)
@@ -92,6 +78,21 @@ void calculateElectricalAngle(){
     // calc 90 degrees ahead
     electricalDegree += direction * 90;
   }
+}
+
+void toClark() {
+  // iClark[i] = {x axis (ia), y axis}
+  // turns 3 vector phase representation into 1 in (arg, dir)
+  //  call after all phase currents are measured/calculated
+  //RR aangle for matrix calc
+  int x, y = 0;
+  for (int i = 2; i >= 0; i--)
+  { // i=2, 1 ,0
+    x += cos(120 * i) * phaseCurrent[i];
+    y += sin(120 * i) * phaseCurrent[i];
+  }
+  summationVector[0] = sqrt(pow(x, 2) + pow(y, 2));
+  summationVector[1] = atan2f(y, x);
 }
 
 void toPark() {

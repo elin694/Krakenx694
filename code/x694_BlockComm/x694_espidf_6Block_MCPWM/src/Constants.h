@@ -141,8 +141,6 @@ constexpr gpio_num_t gateArray[6]= {phaseAHighPort, phaseALowPort, phaseBHighPor
 #define potL 34
 #define adcChannel ADC_CHANNEL_7 // diagonal pairing with physical placement
 
-
-
 /* #################### MOTOR LIMITATIONS #################### */
 /* ========================= MOTOR HARDWARE LIMITS ========================= */
 /*  Unsigned values set to motor's physical limits (MOTOR_SPEC). Magnitudes only. DO NOT CHANGE. */
@@ -151,6 +149,7 @@ constexpr gpio_num_t gateArray[6]= {phaseAHighPort, phaseALowPort, phaseBHighPor
 #define MOTOR_SPEC_MAX_TORQUE (maxDuty)     /*Measured at maxDuty*/
 #define MOTOR_SPEC_MIN_TORQUE (minDuty)      /*Measured at minDuty*/
 // #define MOTOR_SPEC_MAX_VELOCITY (float)(50.0f) /* Unit: RPS Measured at maxDuty */
+#define MOTOR_UNICORN_MAX_VELOCITY 50   
 #define MOTOR_SPEC_MAX_VELOCITY (INPUT_TO_REAL_VELOCITY( 50 )) /* Unit: RPS Measured at maxDuty */
 #define MOTOR_SPEC_MIN_VELOCITY (TICKS_TO_REAL_VELOCITY( MAX_MCPWM_TIMER_PERIOD )) /* Unit: RPS */
 

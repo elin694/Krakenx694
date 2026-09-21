@@ -6,7 +6,7 @@ TaskHandle_t initializeI2CTask= NULL;
 DRAM_ATTR uint32_t megaTimerResolution = 0;
 void initialize(void * parameter){   
    pinSetup();
-   ESP_ERROR_CHECK(adc_oneshot_new_unit(&adcSetup, &adcHandle));
+   ESP_ERROR_CHECK(adc_oneshot_new_unit(&adcSetup, &adcHandle));  
    ESP_ERROR_CHECK(adc_oneshot_config_channel(adcHandle, adcChannel, &adcChannelSetup));
    
    /*higher priority but runs on differnet core*/
@@ -83,6 +83,9 @@ void IRAM_ATTR runOnESPTimerIntr (void * globe) { /*intrpt*/
 
 #ifdef lastResort
 bool IRAM_ATTR VTimerCallback (mcpwm_timer_handle_t timer, const mcpwm_timer_event_data_t *edata, void *user_ctx) { /*intrpt*/
+   /*Activates when Vtimer TEZ, occurs at VTIMER_CLOCK/global.blockPeriod frequency
+   - frequency modified at start via manual timer setup and with mcpwm_timer_set_period(VTimer, vbPeriod_temp) 
+   */
    return runActualISR(user_ctx);
 }
 #else
@@ -98,6 +101,7 @@ void IRAM_ATTR runOnMCPWMIntr (void * user_ctx) { /*intrpt*/
 }
 #endif
 
+/*Runs from the 2 f(x) above*/
 // volatile std::atomic<int> oneTimeFlag = 0;
 bool IRAM_ATTR runActualISR(void * data){
    gVar_t *masterVar = (gVar_t*)data;

@@ -107,7 +107,7 @@ void initializeTimer(){
         ESP_ERROR_CHECK(mcpwm_timer_enable(motorH[i].timer));
     }
     #ifdef lastResort
-    ESP_ERROR_CHECK(mcpwm_timer_register_event_callbacks(VTimer, &callbackFamily, (void *)&global));
+    ESP_ERROR_CHECK(mcpwm_timer_register_event_callbacks(VTimer, &callbackFamily, (void *)&global)); 
     #endif
     ESP_ERROR_CHECK(mcpwm_timer_enable(VTimer));
     
@@ -160,6 +160,7 @@ void IRAM_ATTR executeGates (void * parameter){
             tag(yellow "EgTfre ");
             for(int i =2; i>-1; i--){
                 ESP_ERROR_CHECK(mcpwm_generator_set_force_level(motorH[i].pwmGate0, 0, true));
+                /* (A, B, C) = (0,0,0)*/
                 // ESP_ERROR_CHECK(mcpwm_generator_set_force_level(motorL[i].pwmGate0, 1, true));
             }
         } else {
