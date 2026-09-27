@@ -38,7 +38,7 @@ def POSITION_CONTROL - only test Torque, velocity, and Postion control loop in a
 #define estimatedI2CReadTime_us (uint32_t)(200) //694
 #define velPotReadPeriod (int)(20) //set velocity via pot 1
 #define i2cClockSpeed 1250000
-#define as5600CalibrationRawValue (1916) //38 not 37 because +0.5 and trucnate = round up,30degrees to sector_per_bits is only .5, not 1.
+#define as5600CalibrationRawValue (3177) /*Input Encoder vlaue at calibration*/
 #define adcReadBufferSize 4
 #define CL_CIRCULAR_SLOTS 8                                          /*For storing measured/calculated motor values*/
 

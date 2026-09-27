@@ -180,7 +180,8 @@ void IRAM_ATTR velocityControlLoop(void* pointerToTarget) {
         /* +error = ahead of target ccw*/
         ulTaskNotifyTake( pdTRUE, portMAX_DELAY); /*Wait for GPTImer call*/
         volatile float targetVelocity = *pTargetVelocity;
-        assert( ( -SL_MAX_VELOCITY <= targetVelocity ) && ( targetVelocity <= -SL_MAX_VELOCITY ) );
+        // esp_rom_printf("%d %d")
+        assert( ( -SL_MAX_VELOCITY <= targetVelocity ) && ( targetVelocity <= SL_MAX_VELOCITY ) );
 
         if(global.controlMethod >= VELOCITY_CONTROL){
             // int tNow = SNAP();

@@ -121,15 +121,17 @@ void tagFlag(bool start, int timer);
 //[0 degrees, 30 degrees) = block 0
 #define ENCODER_CALIBRATION_BLOCK 1
 #if (COMMUTATION_BLOCKS == 6)
-#define ENCODER_OFFSET_SCALAR (36.0 + 2 * ENCODER_CALIBRATION_BLOCK)
+#define ENCODER_OFFSET_SCALAR (36.0 + 2 * ENCODER_CALIBRATION_BLOCK)/36.0
+/*2/36 is equivalent to 1/18th of a rotation, or 1 block*/
 #elif (COMMUTATION_BLOCKS == 12)
-#define ENCODER_OFFSET_SCALAR (36.0 + ENCODER_CALIBRATION_BLOCK)
+#define ENCODER_OFFSET_SCALAR (36.0 + ENCODER_CALIBRATION_BLOCK)/36.0
 #endif 
 
 #ifdef as5600DirPinHighAtCalibration
-#define as5600CalibratedOffset (int)((4096.0) * (ENCODER_OFFSET_SCALAR / 36.0) - (as5600CalibrationRawValue) )  
+#define as5600CalibratedOffset (int)((4096.0) * ENCODER_OFFSET_SCALAR - (as5600CalibrationRawValue) )  
 #else
-#define as5600CalibratedOffset (int)((4096.0) * (38.0 / 36.0) - (4096 - as5600CalibrationRawValue) )  
+ //38 not 37 because +0.5 and trucnate = round up,30degrees to sector_per_bits is only .5, not 1.
+#define as5600CalibratedOffset (int)((4096.0) * ENCODER_OFFSET_SCALAR - (4096 - as5600CalibrationRawValue) )  
 #endif
 
 #ifdef as5600DirPinHigh //When motor is running controller code
