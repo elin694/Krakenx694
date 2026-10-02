@@ -13,7 +13,7 @@
 /* #################### USER SET-SETTINGS #################### */
 // #define useGPTimerOverESP32Timer
 #define lastResort
-#define ENABLE_GAMBLING_ON_I2C
+// #define ENABLE_GAMBLING_ON_I2C
 #define startingDuty (0.6) //, normally .8
 // #define as5600DirPinHigh
 // #define as5600DirPinHighAtCalibration

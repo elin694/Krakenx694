@@ -23,8 +23,8 @@
 #define ACCEPTABLE_I2C_READ_WINDOW 230
 #define estimatedI2CReadTime_us (uint32_t)(200) //694
 #define velPotReadPeriod (int)(20) //set velocity via pot 1
-#define i2cClockSpeed 1250000
-#define as5600CalibrationRawValue (1916) //38 not 37 because +0.5 and trucnate = round up,30degrees to sector_per_bits is only .5, not 1.
+#define i2cClockSpeed (1000000)
+#define as5600CalibrationRawValue (1454) //38 not 37 because +0.5 and trucnate = round up,30degrees to sector_per_bits is only .5, not 1.
 #define adcReadBufferSize 4
 #define cBufSize 8                                          /*For storing measured/calculated motor values*/
 

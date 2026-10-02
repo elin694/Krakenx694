@@ -1,5 +1,5 @@
 #include "GateControl.h"
-#include "GC.h"
+// #include "GC.h"
 intr_handle_t oneBlockISR = NULL;
 
 void mcpwmSetup () { //take ~40ms with all log ddebug
