@@ -1,0 +1,6 @@
+-Wno-frame-address
+-mlongcalls
+-fno-builtin-memcpy
+-fno-builtin-memset
+-fno-builtin-bzero
+"-specs=/Users/bingqiling/KRAKENX694_local/KrakenX694/code/x694_BlockComm/x694_espidf_Calibration/.pio/build/esp32doit-devkit-v1/specs/picolibc.specs"
