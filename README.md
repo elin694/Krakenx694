@@ -27,7 +27,7 @@ Like to a Kraken X60, my motor should
     - A flat side where the logo is 
     - a sight truncated cone shape
 
-<img src="README_images/Kraken_x60_orthogonal_views.Svg" alt="Image of Kraken x60 general dimensions" width="700">
+<img src="README_images/Kraken_x60_orthogonal_views.png" alt="Image of Kraken x60 general dimensions" width="700">
 
 The internal wiring and shape may differ as long as the outer shell requiremetn is still fulfilled.
 

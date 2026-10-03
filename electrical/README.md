@@ -36,7 +36,7 @@ My motor controller uses a 3 half-bridge configuration, one half-bridge for each
 
 <!--=========================== COLLAPSIBE SECTION ===========================-->
 ##
-<details open>
+<details>
    <summary> <h3><strong>A failed attempt at creating Boost converter with feedback Control Loop</strong></h1> </summary>
     <!-- NEED BROKEN LINE HERE -->
     I wanted to design my own boost and buck converter module as well, after being inspired from watching MIT’s Open Courseware 6.022 Power electronics series; however, I struggled to implement a feedback system for a stable output voltage.  
