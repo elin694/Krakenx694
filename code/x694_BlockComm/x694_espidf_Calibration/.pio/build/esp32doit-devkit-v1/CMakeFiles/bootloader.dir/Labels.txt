@@ -1,0 +1,13 @@
+# Target labels
+ bootloader
+# Source files and their labels
+/Users/bingqiling/KRAKENX694_local/KrakenX694/code/x694_BlockComm/x694_espidf_Calibration/.pio/build/esp32doit-devkit-v1/CMakeFiles/bootloader
+/Users/bingqiling/KRAKENX694_local/KrakenX694/code/x694_BlockComm/x694_espidf_Calibration/.pio/build/esp32doit-devkit-v1/CMakeFiles/bootloader.rule
+/Users/bingqiling/KRAKENX694_local/KrakenX694/code/x694_BlockComm/x694_espidf_Calibration/.pio/build/esp32doit-devkit-v1/CMakeFiles/bootloader-complete.rule
+/Users/bingqiling/KRAKENX694_local/KrakenX694/code/x694_BlockComm/x694_espidf_Calibration/.pio/build/esp32doit-devkit-v1/bootloader-prefix/src/bootloader-stamp/bootloader-build.rule
+/Users/bingqiling/KRAKENX694_local/KrakenX694/code/x694_BlockComm/x694_espidf_Calibration/.pio/build/esp32doit-devkit-v1/bootloader-prefix/src/bootloader-stamp/bootloader-configure.rule
+/Users/bingqiling/KRAKENX694_local/KrakenX694/code/x694_BlockComm/x694_espidf_Calibration/.pio/build/esp32doit-devkit-v1/bootloader-prefix/src/bootloader-stamp/bootloader-download.rule
+/Users/bingqiling/KRAKENX694_local/KrakenX694/code/x694_BlockComm/x694_espidf_Calibration/.pio/build/esp32doit-devkit-v1/bootloader-prefix/src/bootloader-stamp/bootloader-install.rule
+/Users/bingqiling/KRAKENX694_local/KrakenX694/code/x694_BlockComm/x694_espidf_Calibration/.pio/build/esp32doit-devkit-v1/bootloader-prefix/src/bootloader-stamp/bootloader-mkdir.rule
+/Users/bingqiling/KRAKENX694_local/KrakenX694/code/x694_BlockComm/x694_espidf_Calibration/.pio/build/esp32doit-devkit-v1/bootloader-prefix/src/bootloader-stamp/bootloader-patch.rule
+/Users/bingqiling/KRAKENX694_local/KrakenX694/code/x694_BlockComm/x694_espidf_Calibration/.pio/build/esp32doit-devkit-v1/bootloader-prefix/src/bootloader-stamp/bootloader-update.rule
