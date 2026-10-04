@@ -59,6 +59,7 @@ Contains Java code I worked on to create a "mini oscilloscope" using arduino or 
 
 <img src="README_images/Ardunio_oscilloscope.png" alt="Image of Measurements made with Arduino UNO and plotted Serial Plotter " width="600">
 
+<!-- blockquote -->
 <!-- >  
 >bldc-falstad_v.txt: text file containing the main circuit design and exported from falstad. I am using falstad.com to simulate my pcb designs. bldc-falstad-v2.txt and bldc-falstad-v1.txt are older versions of my current design.  
 >  
@@ -68,12 +69,11 @@ Contains Java code I worked on to create a "mini oscilloscope" using arduino or 
 
 # Acknowledgements
 
-I used a lot of resources, including but not limited to: 
-- [Aaron Danner's Transistor playlist](https://www.youtube.com/watch?v=HxfoFFK_zBc&list=PLXb3r5ny8_1X7Ph5vivwAmILwI42OVv94) (to learn AC signal analysis and Transistor configurations)
-- MIT's OpenCourseWare
-    - 6.002 taught by Anant Agarwal (to learn basic electronics)
-    - 6.622 Power Electronics taught by David Perrault (I learned the theory behind Power electronics and buck, boost, and buck boost converters)
+I want to acknowledge these people
 - BWSI teaching Assistants (specifically Srikrishna for teaching MOSFET and Semiconductor theory)
 - My robotics freinds (shoutout Stuypulse) for being my main motivation
 - [Liong Ma](https://www.youtube.com/watch?v=X3_G4lo7YCs) for being an inspiration to start on this adventure
 - ChatGPT, which I treated as a search engine to assist me in debugging code, introducing physics, electroncis, and C++ concepts, and most importantly, referring me to external resources that I can trust, like Youtube videos by [Robert Ferranec](https://www.youtube.com/@RobertFeranec) or [Texas Instruments](https://www.youtube.com/@TexasInstruments)
+
+#
+#### Last updated Jan 19, 2026
