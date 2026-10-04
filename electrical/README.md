@@ -1,3 +1,15 @@
+# Table of Contents
+- [Table of Contents](#table-of-contents)
+- [Summary of Directories](#summary-of-directories)
+- [Resources Used](#resources-used)
+- [Introduction](#introduction)
+- [Motor Characteristics](#motor-characteristics)
+- [Designing the Electronic Speed Controller(s)](#designing-the-electronic-speed-controllers)
+  - [ESC V0 (A Breadboard Prototype)](#esc-v0-a-breadboard-prototype)
+  - [ESC V1](#esc-v1)
+  - [Frist Time Designing with EasyEDA](#frist-time-designing-with-easyeda)
+    - [Issues with ESC\_V1](#issues-with-esc_v1)
+  - [ESC V2](#esc-v2)
 
 # Summary of Directories
 [ESC V0 Falstad Schematics](/electrical/ESC%20V0%20Falstad%20Schematics): stores the breadboard circuits I simulated on Falstad.com and then built 
@@ -158,8 +170,7 @@ Three seconds into wiring routing my traces, I realized <!-- after placing 100% 
 
 
 <!-- IMAGES   -->
-<img src="README_images/ESC_v1/pcb_v1_top.png" alt=" PCB Layout of my ESC V1 on EasyEDA" height="400">
-<img src="README_images/ESC_v1/pcb_v1_top_3d.png" alt="SUPER COOL 3D view of my ESC_v0 in EasyEDA. The ESP32 Development board is at the center, connected to the custom PCB through hidden pin headers. Buck and Buck-Boost ocnverter baards hang off the edge of the PCB " height="400">
+<img src="README_images/ESC_v1/pcb_v1_top.png" alt=" PCB Layout of my ESC V1 on EasyEDA" height="400"><img src="README_images/ESC_v1/pcb_v1_top_3d.png" alt="SUPER COOL 3D view of my ESC_v0 in EasyEDA. The ESP32 Development board is at the center, connected to the custom PCB through hidden pin headers. Buck and Buck-Boost ocnverter baards hang off the edge of the PCB " height="400">
 
 In all honesty, I had a lot of fun laying out both the ESC_v0 and v1 PCBs. Squeezing every mil of space available and conencting traces was like playing an upgraded versiono of the app Flow Free. Besides, the color scheme was very pretty. 
 
@@ -186,7 +197,7 @@ By the time I tested and successfully ran my 6 Block commutation code on my ESC 
 3.  The PCB, along with the side buck and buck-boost converter attachments, took up too much space. 
 4.  The board was ugly
 5.  I was thinking about making a motor controller that looked liek a Sparkmax, and fund the idea very appealing. However, this PCB wasn't anything
-6. I lter learned hwo the ESP32 Analog to Digital Converter (ADC) wasn't perfect- the center of its linear range occcured more at around 1.35V, instead of the 3.3V/2 = 1.65V I assumed. That means that I wasn't  maximually utilizing the ADC, and achieving the most accurate signals
+6. I learned how the ESP32 Analog to Digital Converter (ADC) wasn't perfect- the center of its linear range was at around 1.35V, instead of the 3.3V/2 = 1.65V that I assumed. That means that ESC V1 wasn't maximually utilizing the ADC, and achieving the most accurate signals
    
    - On another note, I used a shunt resistor of 25mΩ inline/ in series with the motor phases. at a stall current of 1A and with my CSA's gain of 50, the ESP32's ADC shunt voltage pins would experience voltage fluctuation of:
      - gain* Voltage = gain* (Current * resistance) = 50 * ±1A *25mΩ = ±1.25V
@@ -200,6 +211,7 @@ As a result, I decided to make a new iteration of the motor controller: ***ESC_v
 <!-- 7. inser -->
 
 ## ESC V2
+Changelog:
 - using dfm
 - usb differnetial pair
 - equal length tuning
