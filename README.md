@@ -5,23 +5,23 @@ Hello! In this repository, I show my process of making my own BLDC Motor project
 <!-- >Videos from testing: https://drive.google.com/drive/folders/19Vp0OEzmQrTeg8EhbQTLMmb9ZPl5efjz?usp=sharing -->
 
 # Goal
-The Goal of this project is to use as many parts that I have scavenged and lying around to make a functional motor that is looks similar to a Kraken x60 -a popular FIRST Robotics Competition (FRC) motor- enough to confuse anyone at a distance (especially my friends).
+The Goal of this project is to use as many parts that I have scavenged and lying around to make a functional motor that is looks similar to a Kraken x60 -a popular FIRST Robotics Competition (FRC) motor - enough to confuse anyone at a distance (especially my friends).
 ![3d view of a Kraken X60](/README_images/Kraken_60_intro.png)
 
 ### Defining Functional
 Nothing crazy complex here
 - Free Spins easily when motor is not powered
-- Can be software to spin forward and backward (clockwise and counter clockwise)
+- Can be software to spin forward and backward (clockwise and counterclockwise)
 - motor curve
 
 ### Defining "Like" a Kraken x60
 Like to a Kraken X60, my motor should
-- have the general physcal size should be no more than 1/10 of an inch larger or smaller
-- have 12 10-32 motor mounting holes
-- have the Blue Kraken x60 mark , with the exception of the number, which wil be 694
+- Have the general physical size should be no more than 1/10 of an inch larger or smaller
+- Have 12 10-32 motor mounting holes
+- Have the Blue Kraken x60 mark, except for the number, which will be 694
 
-- take the same input voltage of a FRC lead acid Batter (12)
-- have similar details (like the image shown below):
+- Take the same input voltage of an FRC lead acid Batter (12)
+- Have similar details (like the image shown below):
     - vents on a bottom diagonal slant
     - 4 bolts heads visible from the bottom (thought no protruding)
     - A flat side where the logo is 
@@ -29,33 +29,33 @@ Like to a Kraken X60, my motor should
 
 <img src="README_images/Kraken_x60_orthogonal_views.png" alt="Image of Kraken x60 general dimensions" width="700">
 
-The internal wiring and shape may differ as long as the outer shell requiremetn is still fulfilled.
+The internal wiring and shape may differ as long as the outer shell requirement is still fulfilled.
 
 ### Motor Controller/ Electronic Speed Controller (ESC) Constraints
 
 
 ### Other Motor Design Rules/ Constraints
-- Use 3d printed pintalement instead of metal wherever possible (due to simplicity and costs)
-- fewer than 5  Custom Off the Shelf parts-- prefer desiging own solutions where possible
+- Use 3d printed filament instead of metal wherever possible (due to simplicity and costs)
+- Fewer than five Custom Off the Shelf parts-- prefer designing own solutions where possible
 - No time limit or deadline
-- no copying any parts, designs, or schematics for ESC or motor.
-    - While some inspiration is allowed, all parts and ocnnections should be made from my own understanding of ESCs and motors.
+- No copying any parts, designs, or schematics for the ESC or motor.
+    - While some inspiration is allowed, all parts and connections should be made from my own understanding of ESCs and motors.
     - This isn't a real rule, but rather my design philosophy to ensure I fully understand what I'm making.
-- having fun yayyy
+- Having fun yayyy
 
 
 # Folder Hyperlinks
 ## [Mechanical](/mechanical/README.md)
-Contains explaination for my process in designing the 3D printing physical motor case, stator and rotor, and hwo I assembled it.
+Contains explanations for my process in designing the 3D printing physical motor case, stator and rotor, and how I assembled it.
 
 ## [Electrical](/electrical/README.md)
-Contains the files I made along the way to design my Electronic Speed Controller (ESC), from the testing done on Falstad.com (a circuit simulator website) to a breadboard model to my first and second PCB protoypes!
+Contains the files I made along the way to design my Electronic Speed Controller (ESC), from the testing done on Falstad.com (a circuit simulator website) to a breadboard model to my first and second PCB prototypes!
 
 ## [Esp32_code](/esp32_code/README.md)
-Contains the software I ran on an esp32-d0wd-v3 microcontroller to achieve 6 block commutation (an hopfully 12 block and Field-Oriented Control in the near future), as well as myh process in creating that code
+Contains the software I ran on an esp32-d0wd-v3 microcontroller to achieve 6 block commutation (and hopefully 12 block and Field-Oriented Control in the near future), as well as my process in creating that code
 
 ## [Arduino_code](/arduino_code/) & SerialPlotter
-Contains Java code I worked on to create a "mini oscilloscope" using arduino or esp32 ADC's. I discontinued this grapher after learining how expand Arduino’s Serial Plotting data by up to 1000 points and labeling the graphs so I can monitor up to 6 channels (one for each analog pin) simultaneously.
+Contains Java code I worked on to create a "mini oscilloscope" using Arduino or esp32 ADC's. I discontinued this plotter after learning how expand Arduino’s Serial Plotting data by up to 1000 points and labeling the graphs so I can monitor up to 6 channels (one for each analog pin) simultaneously.
 
 <img src="README_images/Ardunio_oscilloscope.png" alt="Image of Measurements made with Arduino UNO and plotted Serial Plotter " width="600">
 
@@ -73,7 +73,7 @@ I want to acknowledge these people
 - BWSI teaching Assistants (specifically Srikrishna for teaching MOSFET and Semiconductor theory)
 - My robotics freinds (shoutout Stuypulse) for being my main motivation
 - [Liong Ma](https://www.youtube.com/watch?v=X3_G4lo7YCs) for being an inspiration to start on this adventure
-- ChatGPT, which I treated as a search engine to assist me in debugging code, introducing physics, electroncis, and C++ concepts, and most importantly, referring me to external resources that I can trust, like Youtube videos by [Robert Ferranec](https://www.youtube.com/@RobertFeranec) or [Texas Instruments](https://www.youtube.com/@TexasInstruments)
+- ChatGPT, which I treated as a search engine to assist me in debugging code, introducing physics, electronics, and C++ concepts, and most importantly, referring me to external resources that I can trust, like YouTube videos by [Robert Ferranec](https://www.youtube.com/@RobertFeranec) or [Texas Instruments](https://www.youtube.com/@TexasInstruments)
 
 #
-#### Last updated Jan 19, 2026
+#### Last updated October 4th, 2026
