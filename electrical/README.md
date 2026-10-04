@@ -162,7 +162,7 @@ Watching a lot of PCB advice layout tutorials really scared me into thinking tha
 8. Use the Nexperia's psmn1r0-30yld N-channel enhancement MOSFET that I scavenged from Spark maxes, because it would show that I knew what the scrapped component is used for.
 
  I have settled on a preferred component placement to minimize inductance and cross-talk across signals on my PCB. Below are the footprints as well as a 3D-model rendition of my current part placement.  
-<img src="README_images/ESC_v1/EasyEDA_componentLayout.png" alt="Image of my component layout in EasyEDA" height="750"> <img src="README_images/ESC_v1/EasyEDA_componentLayout_3D.png" alt="Image of the 3D view of my component layout in EasyEDA" height="350">
+<img src="README_images/ESC_v1/EasyEDA_componentLayout.png" alt="Image of my component layout in EasyEDA" height="550"> <img src="README_images/ESC_v1/EasyEDA_componentLayout_3D.png" alt="Image of the 3D view of my component layout in EasyEDA" height="350">
 
 This layout was my first idea of a layout. Some might call me a genius for this one.
 
