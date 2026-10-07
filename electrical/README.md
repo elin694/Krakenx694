@@ -10,6 +10,8 @@
   - [First Time Designing with EasyEDA](#first-time-designing-with-easyeda)
     - [Issues with ESC\_V1](#issues-with-esc_v1)
   - [ESC V2](#esc-v2)
+    - [Layer Stack up](#layer-stack-up)
+    - [Resolving ESC V1 Issues in ESC V2](#resolving-esc-v1-issues-in-esc-v2)
 
 # Summary of Directories
 [ESC V0 Falstad Schematics](/electrical/ESC%20V0%20Falstad%20Schematics): stores the breadboard circuits I simulated on Falstad.com and then built 
@@ -84,6 +86,7 @@ There doesn't exist a world where my windings can be called circular, but *if* t
 Since my motor casing was practically finalized then, I did. By Ohms law, I would achieve it by raising my motor bus voltage to around 24V. Consequently, at stall, motor current would peak at around 24V/ 22 ≈ 1A (for 2 active phases). I was worried about the overheating my motor, so I'll limit the current to 800mA continuous at normal operation.
 
 Using ChatGPT as a calculator, I this would leave my motor at 57℃ in 3 minutes 20 seconds, a bit longer than the average FRC match with time to spare.
+
 <img src="README_images//ESC_v0_falstad/GPT_on_Thermal_Characteristics.png" alt="Image of Chat GPT’s response to the amount of current I should run to sustain temperatures below 57 degrees F" height="300">
 
 
@@ -192,14 +195,51 @@ Luckily, I had spammed a lot of 0Ω jumper resistors, so I was able to disconnec
 
 ### Issues with ESC_V1
 By the time I tested and successfully ran my 6 Block commutation code on my ESC V1 setup, I had found many issues with my current board, including:
-1.  The stall torque at 20V, although much better than my v0 breadboard prototype, wasn't strong enough for me. It took a little effort, but I could easily overwhelm the motor and spin it in the opposite direction
-2.  The TVS diode, as well as the MOSFETS, were simply intrinsically weak. I chose the TVS2200DRVR because it has the highest reverse standoff voltage while having a peak clamp at 28V, which was barely under the 30V drain-source maximum rating of the scrapped MOSFETs, but it could only stand up to 22V to 23V without activating all the time. I even burned a TVS diode once by setting the power bus voltage to 24V for a mere 5 seconds.
+<!-- =========================== -->
+<details>
+<summary> <strong><em>List of problems: </em></strong> </summary>
+<!-- <summary> The issues presented in [Issues with ESC\_V1](#issues-with-esc_v1) were resolved in their corresponding bullets point below </summary> -->
+
+<ol>
+<li>Low Stall Torque: The stall torque at 20V, although much better than my v0 breadboard prototype, wasn't strong enough for me. It took a little effort, but I could easily overwhelm the motor and spin it in the opposite direction.</li>
+<li>TVS Diodes: The TVS diode, as well as the MOSFETS, were simply intrinsically weak. I chose the TVS2200DRVR because it has the highest reverse standoff voltage while having a peak clamp at 28V, which was barely under the 30V drain-source maximum rating of the scrapped MOSFETs, but it could only stand up to 22V to 23V without activating all the time. I even burned a TVS diode once by setting the power bus voltage to 24V for a mere 5 seconds.</li>
+     <ul>
+     <li> As I later figured out, motors like the REV Neo v1.1 (which the Spark Max was designed for) used less resistive windings and a larger diameter/cross--sectional area wire for their motor windings. As such, they attained larger currents in return for a lower turn density and bus voltage. </li> 
+     <li> My motor had a relatively high winding resistance in exchange for a higher turn density, so my current was limited by my input voltage. </li> 
+     </ul>
+<li>Size: The PCB, along with the side buck and buck-boost converter attachments, took up too much space.  </li>
+<li>Ugly: The board was ugly.</li>
+<li>Spark Max idea: I was thinking about making a motor controller that looked like a Spark Max, and found the idea very appealing. However, this PCB wasn't anything like it. </li>
+<li>Non-linear ADC: I learned how the ESP32 Analog to Digital Converter (ADC) wasn't perfect - the center of its linear range was at around 1.35V, instead of the 3.3V/2 = 1.65V that I assumed. That means that ESC V1 wasn't maximally utilizing the ADC, and achieving the most accurate signals</li>
+<ul>
+  <li> On another note, I used a shunt resistor of 25mΩ inline in series with the motor phases. At a stall current of 1A and with my CSA's gain of 50, the ESP32's ADC shunt voltage pins would experience voltage fluctuation of:</li>
+  <ul>
+    <li>⇒ gain * Voltage = gain* (Current * resistance) = 50 * ±1A *25mΩ = ±1.25V</li>
+    <li>⇒ 1.65V±1.25V = 1.4V to 2.9V</li>
+  </ul>
+</ul>
+
+<ul>
+  <li>However, if I were to use 12 Block commutation, where one phase supplies current and the other 2 sink it, the voltage fluctuation would be:</li>
+  <ul>
+    <li>⇒ gain* Voltage = gain* (Current * resistance) = 50 * ±4/3 A *25mΩ = ±1.66V</li>
+    <li>⇒ 1.65V±1.66V = 0.99V to 3.31V, which is most definitely in the non-linear range of the ADC</li>
+  </ul>
+</ul>
+
+<li>Spain Potentiometer: The Spain potentiometer and the knob became very irritating to use for no reason. it stuck out like sore thumb </li>
+
+</ol>
+</details>
+
+<!-- ===========================
+1. TVS Diodes: The TVS diode, as well as the MOSFETS, were simply intrinsically weak. I chose the TVS2200DRVR because it has the highest reverse standoff voltage while having a peak clamp at 28V, which was barely under the 30V drain-source maximum rating of the scrapped MOSFETs, but it could only stand up to 22V to 23V without activating all the time. I even burned a TVS diode once by setting the power bus voltage to 24V for a mere 5 seconds.
        - As I figured out, motors like the REV Neo v1.1 (which the Spark Max was designed for) used less resistive windings and a larger diameter/cross--sectional area wire for their motor windings. As such, they attained larger currents in return for a lower turn density and bus voltage. 
        - My motor had a relatively high winding resistance, but a higher turn density, so theoretically, if I had the same 
-3.  The PCB, along with the side buck and buck-boost converter attachments, took up too much space. 
-4.  The board was ugly
-5.  I was thinking about making a motor controller that looked like a Spark Max, and fund the idea very appealing. However, this PCB wasn't anything
-6. I learned how the ESP32 Analog to Digital Converter (ADC) wasn't perfect - the center of its linear range was at around 1.35V, instead of the 3.3V/2 = 1.65V that I assumed. That means that ESC V1 wasn't maximally utilizing the ADC, and achieving the most accurate signals
+2.  Size: The PCB, along with the side buck and buck-boost converter attachments, took up too much space. 
+3.  Ugly: The board was ugly
+4.  Spark Max idea: I was thinking about making a motor controller that looked like a Spark Max, and fund the idea very appealing. However, this PCB wasn't anything
+5.  Non-linear ADC: I learned how the ESP32 Analog to Digital Converter (ADC) wasn't perfect - the center of its linear range was at around 1.35V, instead of the 3.3V/2 = 1.65V that I assumed. That means that ESC V1 wasn't maximally utilizing the ADC, and achieving the most accurate signals
    
    - On another note, I used a shunt resistor of 25mΩ inline/ in series with the motor phases. At a stall current of 1A and with my CSA's gain of 50, the ESP32's ADC shunt voltage pins would experience voltage fluctuation of:
      - gain* Voltage = gain* (Current * resistance) = 50 * ±1A *25mΩ = ±1.25V
@@ -207,19 +247,82 @@ By the time I tested and successfully ran my 6 Block commutation code on my ESC 
    - However, if I were to use 12 Block commutation, where one phase supplies current and the other 2 sink it, the voltage fluctuation would be:
      - gain* Voltage = gain* (Current * resistance) = 50 * ±4/3 A *25mΩ = ±1.66V
      - ⇒ 1.65V±1.66V = 0.99V to 3.31V, which is most definitely in the non-linear range of the ADC
-7. The Spain potentiometer and the knob became very irritating to use for no reason
+6. Spain Potentiometer: The Spain potentiometer and the knob became very irritating to use for no reason -->
 
 As a result, I decided to make a new iteration of the motor controller: ***ESC_v2***
 <!-- 7. inser -->
 
 ## ESC V2
-The issues presented were resolved in their corresponding bullets point below:
-1. Upgrade the power bus voltage to 30V.
-2. Choose more resilient TVS diodes and MOSFETs by selecting for 50V+ Maximum V_DS
-   - I chose SP60N13GDP8, a 2-MOSFET-in-1 package with a maximum V_DS of 60V
-   - The complementary TVS diode was the CJSMBJ36A, which starts clamping at a 44V breakdown voltage, and clamps voltage spikes to 57.5V
-3.  
+Following a similar setup used in a Spark max controller, I stacked 2 4 layer boards and connected then with pin headers for signal connections.
+The top board is called Deck1, and the bottom board is Deck2. Both boards use JLCPCB's JLCO4161H-3313 stack up.
 
+### Layer Stack up
+<img src="README_images/ESC_v1/jlc_3313_board.png" alt="JLCO4161H-3313 stack up Heights" height="400">
+
+$\color{cyan}\text{Deck1 stack up: Logic}$
+1. L1: Logic circuits and Sensitive Circuitry
+   -TPS54302 Buck Converter for 12V to 3.3V
+   - ESP32-S3 Chip with Cleared surrounding for antenna
+   - Reset Button to reset ESP32=S3
+   - Spark Max MODE button
+   - Spark Max DEBUG LEDs
+   - USBC Female port (for ESP32-s3 flashing)
+   - Ground Copper Pour
+2. L2: Ground Plane + USB2.0 Differential Signal
+3. L3: Ground Plane
+4. L4: Miscellaneous Components
+   - Screw terminals For I2C and IOMUX high speed SPI pins
+   - 5V or 12V selectable jumper resistor input to 3.3V LDO
+   - Trim Pots for tuning future PID or control constants
+   -  Pin Headers for 12V Battery wiring and gate signal
+   -  BT button for flashing ESP32-S3
+   -  3.3V Power Copper Pour
+  
+<img src="README_images/ESC_v2/deck1_top.png" alt="Deck1 PCB L1" height="500">
+<img src="README_images/ESC_v2/deck1_bottom.png" alt="Deck1 PCB L4" height="500">
+
+$\color{cyan}\text{Deck2 stack up: Power and Current}$
+1. L1: High power circuitry
+   - CSA with Current sense resistors
+   - Half bridge MOSFET for 3 half-bridges
+   -  snubber circuits
+   -  TVS protection diodes
+   -  power decoupling capacitors
+   -  Boost Converter half bridge and inductor
+   -  (Motor) Bus voltage Copper Pour
+2. L2: Ground Plane
+3. L3: Ground Plane
+4. L4: Sensitive Low Power Circuitry
+   - MOSFET Gate drivers (UCC27714DR) 
+   - LM5122 Boost Converter IC 
+   - Ground Copper Pour
+<img src="README_images/ESC_v2/deck2_top.png" alt="Deck1 PCB L1" height="500">
+<img src="README_images/ESC_v2/deck2_bottom.png" alt="Deck1 PCB L4" height="500">
+  
+Because this is a new order, it's also an opportunity to add more features.
+1. No Split Ground Plane: in v1, L2 has a signal ground, while L3 had a power ground, both of which I shorted with a single jumper wire out of fear for contaminating signal current with return current.
+     - In V2, I learned to stitch both ground planes together with vias so that signal return current doesn't cross high power motor current, and I'm testing it out here.
+  
+### Resolving ESC V1 Issues in ESC V2
+<details>
+<summary> <strong><em>V1 issues were resolved in their corresponding bullets point listed here </em></strong> </summary>
+<!-- <summary> The issues presented in [Issues with ESC\_V1](#issues-with-esc_v1) were resolved in their corresponding bullets point below </summary> -->
+
+<ol>
+<li>Low Stall Torque: Upgraded the power bus voltage to 30V.</li>
+<li>TVS Diodes: Chose more resilient TVS diodes and MOSFETs by selecting for 50V+ Maximum V_ds </li>
+     <ul>
+     <li> I chose SP60N13GDP8, a 2-MOSFET-in-1 package with a maximum V_DS of 60V. </li> 
+     <li> The complementary TVS diode was the CJSMBJ36A, which starts clamping at a 44V breakdown voltage, and clamps voltage spikes to 57.5V, well under the 60V V_ds maximum of the MOSFET. </li> 
+     </ul>
+<li>Size: designed boards to be more dense and compact, utilizing more 0402 and 0603 compoenents instead 0805 or 0612. </li>
+<li>Ugly: Created onboard boost and buck converters , but using Integrated Circuit(IC) chips this time to reduce complexity. Fewer bulging wires man board more appealing.</li>
+<li>Spark Max idea: designed boards to fit into a Spark-max like casing </li>
+<li>Non-linear ADC: Adjusted the reference voltage of the INA240A50 CSA to 1.35V, and accommodated the shunt resistor by lowering its resitance to 20mΩ instead. </li>
+<li>Spain Potentiometer: Replaced potentiometer with a temporary larger ands stronger one, and remove it later (because real Spark maxes don't have rotary knobs) </li>
+
+</ol>
+</details>
 
 Changelog:
 - using DFMs
